@@ -5,7 +5,7 @@ import { __filename, __dirname } from '@/utils/helper';
 
 const PORT = process.env.PORT;
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync().then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
