@@ -1,7 +1,8 @@
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
-import userRoutes from '@/routes/userRoutes';
+// import userRoutes from '@/routes/userRoutes';
+import authRoutes from '@/routes/authRoutes';
 
 const app = express();
 
@@ -11,7 +12,8 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/users', userRoutes);
+// app.use('/users', userRoutes);
+app.use('/api/auth', authRoutes);
 
 app.use(cors());
 app.options('*', cors());

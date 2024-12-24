@@ -12,13 +12,15 @@
     "outDir": "./dist", // Redirect output structure to the dist directory
     "rootDir": "./src", // Base directory to resolve non-relative module names
     "isolatedModules": true, // Ensure each file is treated as a module
-    "noEmit": false, // Don't emit compiled files
+    "noEmit": false, // Emit compiled files
     "sourceMap": true, // Generate source maps for debugging
-    "baseUrl": ".",
+    "baseUrl": ".", // Base directory for module resolution
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["./src/*"] // Alias for src directory
+    },
+    "types": ["node", "express", "sequelize", "bcryptjs", "jsonwebtoken"], // Include necessary type definitions
+    "typeRoots": ["./node_modules/@types", "./src/types"] // Include custom type definitions
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": ["src/**/*"], // Include all TypeScript files in src directory
+  "exclude": ["node_modules", "**/*.spec.ts"] // Exclude node_modules and test files
 }
