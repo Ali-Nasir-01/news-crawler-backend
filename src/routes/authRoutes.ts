@@ -7,9 +7,7 @@ const router = express.Router();
 router.post('/register', register);
 router.post('/login', login);
 
-router.use(authMiddleware);
-
-router.get('/protected', (req, res) => {
+router.get('/protected', authMiddleware, (req, res) => {
   if (req.user) {
     res.send(`Protected content for user: ${req.user.username}`);
   } else {

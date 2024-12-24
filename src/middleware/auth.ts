@@ -4,6 +4,7 @@ import User from '@/models/user';
 
 const authMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
+    console.log('test');
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
       res.status(401).send('Unauthorized');
@@ -16,6 +17,7 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction): 
       res.status(401).send('Unauthorized');
       return;
     }
+
     req.user = user;
     next();
   } catch (error) {
