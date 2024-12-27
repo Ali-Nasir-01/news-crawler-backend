@@ -10,10 +10,10 @@ class User extends Model<IUserAttributes, UserCreationAttributes> implements IUs
   declare id: number;
   declare username: string;
   declare email: string;
-  declare password: string;
+  declare password?: string;
 
   public comparePassword(password: string): Promise<boolean> {
-    return bcrypt.compare(password, this.password);
+    return bcrypt.compare(password, this.password!);
   }
 }
 

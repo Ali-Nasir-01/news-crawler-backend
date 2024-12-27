@@ -49,12 +49,12 @@ export const login = async (req: Request<{}, {}, ILoginRequest>, res: Response):
     }
 
     const token = generateToken({ id: user.id, username: user.username });
-    res.json({ token, user });
+
+    const userWithoutPassword = user.get({ plain: true });
+    delete userWithoutPassword.password;
+
+    res.json({ token, user: userWithoutPassword });
   } catch (error) {
-    if (error instanceof Error) {
-      res.status(400).send(error.message);
-    } else {
-      res.status(400).send('An unknown error occurred');
-    }
+    res.status(500).send('Internal server error');
   }
 };
