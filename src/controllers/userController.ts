@@ -49,7 +49,7 @@ export const login = async (req: Request<{}, {}, ILoginRequest>, res: Response):
     }
 
     const token = generateToken({ id: user.id, username: user.username });
-    res.json({ token });
+    res.json({ token, user });
   } catch (error) {
     if (error instanceof Error) {
       res.status(400).send(error.message);
