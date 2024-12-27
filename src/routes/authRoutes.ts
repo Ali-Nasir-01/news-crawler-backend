@@ -7,12 +7,4 @@ const router = express.Router();
 router.post('/register', register);
 router.post('/login', login);
 
-router.get('/protected', authMiddleware, (req, res) => {
-  if (req.user) {
-    res.send(`Protected content for user: ${req.user.username}`);
-  } else {
-    res.status(401).send('Unauthorized');
-  }
-});
-
 export default router;

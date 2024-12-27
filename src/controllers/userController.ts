@@ -58,3 +58,35 @@ export const login = async (req: Request<{}, {}, ILoginRequest>, res: Response):
     res.status(500).send('Internal server error');
   }
 };
+
+export const getAllUsers = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const users = await User.findAll({
+      attributes: { exclude: ['password'] },
+    });
+    res.json(users);
+  } catch (error) {
+    res.status(500).send('Internal server error');
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      res.status(400).send('User ID is required');
+      return;
+    }
+
+    const user = await User.findByPk(id);
+    if (!user) {
+      res.status(404).send('User not found');
+      return;
+    }
+
+    await user.destroy();
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).send('Internal server error');
+  }
+};
