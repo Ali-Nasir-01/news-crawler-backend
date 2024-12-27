@@ -58,3 +58,14 @@ export const login = async (req: Request<{}, {}, ILoginRequest>, res: Response):
     res.status(500).send('Internal server error');
   }
 };
+
+export const getAllUsers = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const users = await User.findAll({
+      attributes: { exclude: ['password'] },
+    });
+    res.json(users);
+  } catch (error) {
+    res.status(500).send('Internal server error');
+  }
+};
