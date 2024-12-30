@@ -6,6 +6,7 @@ import healthCheckRoutes from '@/routes/healthCheckRoutes';
 import authRoutes from '@/routes/authRoutes';
 import normalizerRoutes from '@/routes/normalizeRoutes';
 import authMiddleware from './middleware/auth';
+import newsRoutes from '@/routes/newsRoutes';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use('/api/users', authMiddleware, userRoutes);
 app.use('/api/health', healthCheckRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api', normalizerRoutes);
+app.use('/api/news', authMiddleware, newsRoutes);
 
 // Handle 404 errors
 app.use((req, res, next) => {
