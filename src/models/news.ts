@@ -1,12 +1,29 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '@/config';
+import sequelize from '../config/db';
 
-class News extends Model {
+interface NewsAttributes {
+  id?: number;
+  title: string;
+  subtitle?: string;
+  text?: string;
+  category?: string;
+  link: string;
+  images?: string[];
+  publishDate?: Date;
+  agency: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+class News extends Model<NewsAttributes> implements NewsAttributes {
   public id!: number;
   public title!: string;
-  public body!: string;
-  public category!: string;
+  public subtitle?: string;
+  public text?: string;
+  public category?: string;
   public link!: string;
+  public images?: string[];
+  public publishDate?: Date;
   public agency!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -20,10 +37,14 @@ News.init(
       primaryKey: true,
     },
     title: {
-      type: new DataTypes.STRING(128),
+      type: new DataTypes.TEXT(),
       allowNull: false,
     },
-    body: {
+    subtitle: {
+      type: new DataTypes.TEXT(),
+      allowNull: true,
+    },
+    text: {
       type: new DataTypes.TEXT(),
       allowNull: true,
     },
@@ -32,8 +53,16 @@ News.init(
       allowNull: true,
     },
     link: {
-      type: new DataTypes.STRING(256),
+      type: new DataTypes.TEXT(),
       allowNull: false,
+    },
+    images: {
+      type: DataTypes.JSON,
+      allowNull: true,
+    },
+    publishDate: {
+      type: DataTypes.DATE,
+      allowNull: true,
     },
     agency: {
       type: new DataTypes.STRING(128),
